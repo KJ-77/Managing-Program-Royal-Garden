@@ -8,10 +8,7 @@ function Home() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <ModeToggle />
-    <div
-      style={{ backgroundColor: COLORS.first }}
-      className="min-h-screen text-white"
-    >
+    <div  className="min-h-screen text-white">
       {/* Root styling */}
       <div className="w-full mx-auto p-8 text-center">
         {/* App container */}
