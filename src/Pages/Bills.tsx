@@ -1,5 +1,4 @@
-import React from 'react'
-import HamburgerMenu from '../Components/ui/HamburgerMenu'
+import HamburgerMenu from '../components/ui/HamburgerMenu'
 
 const Bills = () => {
   return (

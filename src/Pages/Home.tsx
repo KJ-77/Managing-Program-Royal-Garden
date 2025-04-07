@@ -1,7 +1,6 @@
 import CompanyCard from "../components/ui/CompanyCard";
 import HamburgerMenu from "../components/ui/HamburgerMenu";
 import COLORS from "../styles/colorPalette.ts";
-import React from "react";
 import { ThemeProvider } from "@/components/theme-provider"
 import { ModeToggle } from "@/components/mode-toggle.tsx";
 

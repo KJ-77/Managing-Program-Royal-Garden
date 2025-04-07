@@ -1,4 +1,3 @@
-import React from 'react'
 import HamburgerMenu from '../components/ui/HamburgerMenu'
 
 const Documents = () => {

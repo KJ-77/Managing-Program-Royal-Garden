@@ -1,4 +1,3 @@
-import React from "react";
 import COLORS from "../../styles/colorPalette.ts";
 
 const CompanyCard = ({ name = "name", desc = "description", bg = COLORS.second }) => {
