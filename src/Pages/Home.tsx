@@ -2,10 +2,13 @@ import CompanyCard from "../components/ui/CompanyCard";
 import HamburgerMenu from "../components/ui/HamburgerMenu";
 import COLORS from "../styles/colorPalette.ts";
 import React from "react";
+import { ThemeProvider } from "@/components/theme-provider"
+import { ModeToggle } from "@/components/mode-toggle.tsx";
 
 function Home() {
   return (
-    
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <ModeToggle />
     <div
       style={{ backgroundColor: COLORS.first }}
       className="min-h-screen text-white"
@@ -56,6 +59,7 @@ function Home() {
         </div>
       </div>
     </div>
+    </ThemeProvider>
   );
 }
 
