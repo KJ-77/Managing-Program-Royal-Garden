@@ -5,6 +5,7 @@ import Home from "./Pages/Home.tsx";
 import Documents from "./Pages/Documents.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Bills from "./Pages/Bills.tsx";
+import LoginPage from "./Pages/LoginPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -21,12 +22,18 @@ const router = createBrowserRouter([
       <Documents />
     ),
   },
-  {
-    path: "/bills",
-    element: (
-      <Bills />
-    ),
-  },
+    {
+      path: "/bills",
+      element: (
+        <Bills />
+      ),
+    },
+    {
+      path: "/login",
+      element: (
+        <LoginPage />
+      ),
+    },
 ]);
 
 const rootElement = document.getElementById('root');
