@@ -6,6 +6,7 @@ import Documents from "./Pages/Documents.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Bills from "./Pages/Bills.tsx";
 import LoginPage from "./Pages/LoginPage.tsx";
+import Profile from "./Pages/Profile.tsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,12 @@ const router = createBrowserRouter([
       path: "/login",
       element: (
         <LoginPage />
+      ),
+    },
+    {
+      path: "/profile",
+      element: (
+        <Profile />
       ),
     },
 ]);
