@@ -3,6 +3,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar.tsx";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle.tsx";
+import { ButtonDemo } from "@/components/languagebutton";
 
 const Profile = () => {
   return (
@@ -26,6 +27,7 @@ const Profile = () => {
             </Avatar>
             <h2 className="mt-4 text-xl font-semibold">User Profile</h2>
           </div>
+          <ButtonDemo />
         </div>
       </SidebarProvider>
     </ThemeProvider>
