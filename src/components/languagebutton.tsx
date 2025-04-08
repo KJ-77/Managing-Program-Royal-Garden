@@ -1,14 +1,23 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/components/language-provider";
 
-export function ButtonDemo() {
-  const [language, setLanguage] = useState<"english" | "arabic">("english")
+export function LanguageToggle() {
+  const { language, setLanguage } = useLanguage();
 
   const toggleLanguage = () => {
-    setLanguage(language === "english" ? "arabic" : "english")
-  }
+    setLanguage(language === "english" ? "arabic" : "english");
+  };
 
-  return <Button onClick={toggleLanguage}>{language === "english" ? "عربي" : "English"}</Button>
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={toggleLanguage}
+      className="mx-2"
+    >
+      {language === "english" ? "عربي" : "En"}
+    </Button>
+  );
 }

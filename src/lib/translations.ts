@@ -1,0 +1,98 @@
+type TranslationType = {
+  [key: string]: {
+    english: string;
+    arabic: string;
+  };
+};
+
+export const translations: TranslationType = {
+  // Navigation
+  home: {
+    english: "Home",
+    arabic: "الرئيسية",
+  },
+  bills: {
+    english: "Bills",
+    arabic: "الفواتير",
+  },
+  documents: {
+    english: "Documents",
+    arabic: "المستندات",
+  },
+  profile: {
+    english: "Profile",
+    arabic: "الملف الشخصي",
+  },
+  login: {
+    english: "Login",
+    arabic: "تسجيل الدخول",
+  },
+  side:{
+    english: "left",
+    arabic: "right"
+  },
+
+  // Home Page
+  royalGardenManagement: {
+    english: "Royal Garden Management",
+    arabic: "إدارة الحديقة الملكية",
+  },
+  royalGarden: {
+    english: "Royal Garden",
+    arabic: "الحديقة الملكية",
+  },
+  managePlants: {
+    english: "Manage and track all plants in the royal garden inventory.",
+    arabic: "إدارة وتتبع جميع النباتات في مخزون الحديقة الملكية.",
+  },
+  viewPlants: {
+    english: "View Plants",
+    arabic: "عرض النباتات",
+  },
+
+  // Profile Page
+  userProfile: {
+    english: "User Profile",
+    arabic: "الملف الشخصي للمستخدم",
+  },
+
+  // Login Form
+  emailAddress: {
+    english: "Email Address",
+    arabic: "البريد الإلكتروني",
+  },
+  password: {
+    english: "Password",
+    arabic: "كلمة المرور",
+  },
+  rememberMe: {
+    english: "Remember me",
+    arabic: "تذكرني",
+  },
+  forgotPassword: {
+    english: "Forgot password?",
+    arabic: "نسيت كلمة المرور؟",
+  },
+  signIn: {
+    english: "Sign In",
+    arabic: "تسجيل الدخول",
+  },
+
+  // Theme Toggle
+  light: {
+    english: "Light",
+    arabic: "فاتح",
+  },
+  dark: {
+    english: "Dark",
+    arabic: "داكن",
+  },
+  system: {
+    english: "System",
+    arabic: "النظام",
+  },
+  toggleTheme: {
+    english: "Toggle theme",
+    arabic: "تبديل السمة",
+  },
+};

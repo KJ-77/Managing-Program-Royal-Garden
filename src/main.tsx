@@ -7,6 +7,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Bills from "./Pages/Bills.tsx";
 import LoginPage from "./Pages/LoginPage.tsx";
 import Profile from "./Pages/Profile.tsx";
+import { ThemeProvider } from "./components/theme-provider.tsx";
+import { LanguageProvider } from "./components/language-provider.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,34 +21,30 @@ const router = createBrowserRouter([
   },
   {
     path: "/documents",
-    element: (
-      <Documents />
-    ),
+    element: <Documents />,
   },
-    {
-      path: "/bills",
-      element: (
-        <Bills />
-      ),
-    },
-    {
-      path: "/login",
-      element: (
-        <LoginPage />
-      ),
-    },
-    {
-      path: "/profile",
-      element: (
-        <Profile />
-      ),
-    },
+  {
+    path: "/bills",
+    element: <Bills />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
 ]);
 
-const rootElement = document.getElementById('root');
-if (!rootElement) throw new Error('Failed to find the root element');
+const rootElement = document.getElementById("root");
+if (!rootElement) throw new Error("Failed to find the root element");
 createRoot(rootElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
-)
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <LanguageProvider defaultLanguage="english" storageKey="vite-ui-language">
+        <RouterProvider router={router} />
+      </LanguageProvider>
+    </ThemeProvider>
+  </StrictMode>
+);
