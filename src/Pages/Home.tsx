@@ -8,17 +8,18 @@ import { AppSidebar } from "@/components/app-sidebar.tsx";
 function Home() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <SidebarProvider>
+      <SidebarProvider
+        defaultOpen={false}>
         <AppSidebar />
         <div className="w-full mx-auto p-5 text-center">
-            <div className="flex justify-between w-full mb-4">
+          <div className="flex justify-between w-full mb-4">
             <div>
               <SidebarTrigger />
             </div>
             <div>
               <ModeToggle />
             </div>
-            </div>
+          </div>
 
           <div className="max-w-7xl mx-auto">
             <header className="mb-8">

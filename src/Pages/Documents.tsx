@@ -1,12 +1,26 @@
-import HamburgerMenu from '../components/ui/HamburgerMenu'
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar.tsx";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ModeToggle } from "@/components/mode-toggle.tsx";
 
 const Documents = () => {
   return (
-    <>
-        <HamburgerMenu />
-        <h1 className="text-center text-3xl p-6">Documents</h1>
-    </>
-  )
-}
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <SidebarProvider>
+        <AppSidebar />
+        <div className="flex justify-between w-full mb-4">
+          <div>
+            <SidebarTrigger />
+          </div>
+          <div>
+            <ModeToggle />
+          </div>
+        </div>
+        <div>
+        </div>
+      </SidebarProvider>
+    </ThemeProvider>
+  );
+};
 
-export default Documents
+export default Documents;
