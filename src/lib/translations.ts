@@ -35,15 +35,15 @@ export const translations: TranslationType = {
   // Home Page
   royalGardenManagement: {
     english: "Royal Garden Management",
-    arabic: "إدارة الحديقة الملكية",
+    arabic: "إدارة الرويال غاردن",
   },
   royalGarden: {
     english: "Royal Garden",
-    arabic: "الحديقة الملكية",
+    arabic: "الرويال غاردن",
   },
   managePlants: {
     english: "Manage and track all plants in the royal garden inventory.",
-    arabic: "إدارة وتتبع جميع النباتات في مخزون الحديقة الملكية.",
+    arabic: "إدارة وتتبع جميع النباتات في مخزون الرويال غاردن."
   },
   viewPlants: {
     english: "View Plants",
