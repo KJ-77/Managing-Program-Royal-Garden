@@ -95,4 +95,26 @@ export const translations: TranslationType = {
     english: "Toggle theme",
     arabic: "تبديل السمة",
   },
+  
+  // Company Notes Page
+  companyNotFound: {
+    english: "Company not found",
+    arabic: "الشركة غير موجودة"
+  },
+  notes: {
+    english: "Notes",
+    arabic: "ملاحظات"
+  },
+  enterNotesAboutCompany: {
+    english: "Enter notes about this company...",
+    arabic: "أدخل ملاحظات حول هذه الشركة..."
+  },
+  saveNotes: {
+    english: "Save Notes",
+    arabic: "حفظ الملاحظات"
+  },
+  notesSavedSuccessfully: {
+    english: "Notes saved successfully!",
+    arabic: "تم حفظ الملاحظات بنجاح!"
+  }
 };

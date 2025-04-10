@@ -9,7 +9,7 @@ import LoginPage from "./Pages/LoginPage.tsx";
 import Profile from "./Pages/Profile.tsx";
 import { ThemeProvider } from "./components/theme-provider.tsx";
 import { LanguageProvider } from "./components/language-provider.tsx";
-
+import CompanyNotes from "./Pages/CompanyNotes";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,6 +35,10 @@ const router = createBrowserRouter([
     path: "/profile",
     element: <Profile />,
   },
+  {
+    path: "/company/:companyId/notes", // Dynamic route with parameter
+    element: <CompanyNotes />
+  }
 ]);
 
 const rootElement = document.getElementById("root");

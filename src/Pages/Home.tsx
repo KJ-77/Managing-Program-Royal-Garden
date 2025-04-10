@@ -6,6 +6,17 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { SidebarTrigger } from "@/components/sidebar-trigger";
 import { AppSidebar } from "@/components/app-sidebar.tsx";
 import { useTranslation } from "@/hooks/use-translation";
+import { Link } from "react-router-dom";
+
+// Company data for the cards
+const companies = [
+  { id: "1", name: "Company One" },
+  { id: "2", name: "Company Two" },
+  { id: "3", name: "Company Three" },
+  { id: "4", name: "Company Four" },
+  { id: "5", name: "Company Five" },
+  { id: "6", name: "Company Six" }
+];
 
 function Home() {
   const { t } = useTranslation();
@@ -30,62 +41,28 @@ function Home() {
           </header>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card>
-              <div className="flex justify-center mb-4">
-                <div className="w-[150px] h-[150px] rounded-full overflow-hidden">
-                  <img
-                    src="public/unnamed (1).jpg"
-                    alt="RG Icon"
-                    className="w-full h-full object-cover"
-                  />
+            {companies.map((company, index) => (
+              <Card key={company.id}>
+                {index === 0 && (
+                  <div className="flex justify-center mb-4">
+                    <div className="w-[150px] h-[150px] rounded-full overflow-hidden">
+                      <img
+                        src="unnamed (1).jpg"
+                        alt="RG Icon"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                )}
+                <h2 className="text-lg font-bold mb-4">{company.name}</h2>
+                <p className="mb-4">{t("managePlants")}</p>
+                <div className="flex justify-center">
+                  <Button className="w-30" asChild>
+                    <Link to={`/company/${company.id}/notes`}>{t("viewPlants")}</Link>
+                  </Button>
                 </div>
-              </div>
-              <h2 className="text-lg font-bold mb-4">{t("royalGarden")}</h2>
-              <p className="mb-4">{t("managePlants")}</p>
-              <div className="flex justify-center">
-                <Button className="w-30">{t("viewPlants")}</Button>
-              </div>
-            </Card>
-
-            <Card>
-              <h2 className="text-lg font-bold mb-4">{t("royalGarden")}</h2>
-              <p className="mb-4">{t("managePlants")}</p>
-              <div className="flex justify-center">
-                <Button className="w-30">{t("viewPlants")}</Button>
-              </div>
-            </Card>
-
-            <Card>
-              <h2 className="text-lg font-bold mb-4">{t("royalGarden")}</h2>
-              <p className="mb-4">{t("managePlants")}</p>
-              <div className="flex justify-center">
-                <Button className="w-30">{t("viewPlants")}</Button>
-              </div>
-            </Card>
-
-            <Card>
-              <h2 className="text-lg font-bold mb-4">{t("royalGarden")}</h2>
-              <p className="mb-4">{t("managePlants")}</p>
-              <div className="flex justify-center">
-                <Button className="w-30">{t("viewPlants")}</Button>
-              </div>
-            </Card>
-
-            <Card>
-              <h2 className="text-lg font-bold mb-4">{t("royalGarden")}</h2>
-              <p className="mb-4">{t("managePlants")}</p>
-              <div className="flex justify-center">
-                <Button className="w-30">{t("viewPlants")}</Button>
-              </div>
-            </Card>
-
-            <Card>
-              <h2 className="text-lg font-bold mb-4">{t("royalGarden")}</h2>
-              <p className="mb-4">{t("managePlants")}</p>
-              <div className="flex justify-center">
-                <Button className="w-30">{t("viewPlants")}</Button>
-              </div>
-            </Card>
+              </Card>
+            ))}
           </div>
         </div>
       </div>
