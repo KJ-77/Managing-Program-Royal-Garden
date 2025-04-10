@@ -5,13 +5,13 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.9547 0.0173 93.56);
+  --background: oklch(1 0 0); /* Primary:F2EFE7 */
   --foreground: oklch(0.145 0 0);
-  --card: oklch(0.7820 0.1142 196.7);
+  --card: oklch(0.9 0.13 90);      /* Secondary:9ACBD0 */  
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.6863 0.1742 181.3);
+  --primary: oklch(0.6 0.1 50);  /* Third:48A6A7 */  
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
