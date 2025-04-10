@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 import { useLanguage } from "@/components/language-provider";
-
+import { Link } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -65,10 +65,10 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.key}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link to={item.url}>
                       <item.icon />
                       <span>{t(item.key)}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
