@@ -3,42 +3,55 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import Home from "./Pages/Home.tsx";
 import Documents from "./Pages/Documents.tsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import Bills from "./Pages/Bills.tsx";
 import LoginPage from "./Pages/LoginPage.tsx";
 import Profile from "./Pages/Profile.tsx";
+import CompanyNotes from "./Pages/CompanyNotes.tsx";
 import { ThemeProvider } from "./components/theme-provider.tsx";
 import { LanguageProvider } from "./components/language-provider.tsx";
-import CompanyNotes from "./Pages/CompanyNotes";
+import SidebarLayout from "./Layouts/SidebarLayout.tsx";
+
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <StrictMode>
-        <Home />
-      </StrictMode>
-    ),
-  },
-  {
-    path: "/documents",
-    element: <Documents />,
-  },
-  {
-    path: "/bills",
-    element: <Bills />,
-  },
   {
     path: "/login",
     element: <LoginPage />,
   },
   {
-    path: "/profile",
-    element: <Profile />,
+    // SidebarLayout will be applied to all routes within this path
+    path: "/",
+    element: <SidebarLayout />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: "documents",
+        element: <Documents />,
+      },
+      {
+        path: "bills",
+        element: <Bills />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "company/:companyId/notes",
+        element: <CompanyNotes />,
+      },
+    ],
   },
   {
-    path: "/company/:companyId/notes", // Dynamic route with parameter
-    element: <CompanyNotes />
-  }
+    path: "*",
+    element: <Navigate to="/" replace />,
+  },
 ]);
 
 const rootElement = document.getElementById("root");

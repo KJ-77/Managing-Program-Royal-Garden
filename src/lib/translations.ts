@@ -45,9 +45,9 @@ export const translations: TranslationType = {
     english: "Manage and track all plants in the royal garden inventory.",
     arabic: "إدارة وتتبع جميع النباتات في مخزون الرويال غاردن."
   },
-  viewPlants: {
-    english: "View Plants",
-    arabic: "عرض النباتات",
+  viewNotes: {
+    english: "View Notes",
+    arabic: "عرض الملاحظات",
   },
 
   // Profile Page
