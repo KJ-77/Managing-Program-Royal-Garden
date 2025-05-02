@@ -20,12 +20,20 @@ export interface FileObject {
 }
 
 /**
+ * Interface representing a path segment for breadcrumb navigation
+ */
+export interface PathSegment {
+  name: string;
+  path: string;
+}
+
+/**
  * Interface for folder listing response
  */
 export interface FolderContents {
   files: FileObject[];
   folders: FileObject[];
-  pathSegments: string[];
+  pathSegments: PathSegment[]; // Changed from string[] to PathSegment[]
   currentPath: string;
 }
 
@@ -228,6 +236,39 @@ export async function deleteFile(key: string): Promise<void> {
     }
   } catch (error) {
     console.error("Error deleting file:", error);
+    throw error;
+  }
+}
+
+/**
+ * Create a new folder in S3
+ */
+export async function createFolder(
+  folderName: string,
+  currentPath: string = ""
+): Promise<string> {
+  try {
+    // Construct the folder path based on current directory
+    const folderPath = currentPath
+      ? `${currentPath}${currentPath.endsWith("/") ? "" : "/"}${folderName}`
+      : folderName;
+
+    const response = await fetch(`${API_BASE_URL}/folders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ folderPath }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.folderPath;
+  } catch (error) {
+    console.error("Error creating folder:", error);
     throw error;
   }
 }

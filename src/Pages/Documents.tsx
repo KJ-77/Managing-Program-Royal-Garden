@@ -7,6 +7,7 @@ import {
   uploadFile,
   deleteFile,
   getFileUrl,
+  createFolder,
 } from "../lib/documentApi";
 import {
   Upload,
@@ -18,15 +19,16 @@ import {
   Download,
   FileQuestion,
   Loader2,
+  FolderPlus,
 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Card } from "../components/ui/card";
 import { Separator } from "../components/ui/separator";
-import { 
-  Tooltip, 
-  TooltipTrigger, 
-  TooltipContent 
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
 } from "../components/ui/tooltip";
 
 export default function Documents() {
@@ -41,6 +43,11 @@ export default function Documents() {
   const [selectedItem, setSelectedItem] = useState<FileObject | null>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // New folder state
+  const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false);
+  const [newFolderName, setNewFolderName] = useState("");
+  const [creatingFolder, setCreatingFolder] = useState(false);
 
   // Function to load files and folders for the current path
   const loadFiles = useCallback(async () => {
@@ -146,6 +153,31 @@ export default function Documents() {
     }
   };
 
+  // Handle folder creation
+  const handleCreateFolder = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newFolderName.trim()) return;
+
+    setCreatingFolder(true);
+    setError(null);
+
+    try {
+      await createFolder(newFolderName.trim(), currentPath);
+
+      // Reset states
+      setNewFolderName("");
+      setIsCreateFolderOpen(false);
+
+      // Refresh file list to show the new folder
+      await loadFiles();
+    } catch (err) {
+      console.error("Error creating folder:", err);
+      setError("Failed to create folder. Please try again.");
+    } finally {
+      setCreatingFolder(false);
+    }
+  };
+
   // Filter files and folders based on search query
   const filteredFiles = files.filter((file) =>
     file.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -185,6 +217,21 @@ export default function Documents() {
           multiple
           onChange={handleFileUpload}
         />
+
+        {/* New Folder Button */}
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => setIsCreateFolderOpen(true)}
+          disabled={creatingFolder}
+        >
+          {creatingFolder ? (
+            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+          ) : (
+            <FolderPlus className="w-4 h-4 mr-2" />
+          )}
+          New Folder
+        </Button>
 
         <Button
           size="sm"
@@ -244,11 +291,49 @@ export default function Documents() {
         </div>
       )}
 
+      {/* Create Folder Dialog */}
+      {isCreateFolderOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full">
+            <h3 className="text-lg font-medium mb-4">Create New Folder</h3>
+            <form onSubmit={handleCreateFolder}>
+              <Input
+                type="text"
+                placeholder="Folder name"
+                value={newFolderName}
+                onChange={(e) => setNewFolderName(e.target.value)}
+                className="mb-4"
+                autoFocus
+              />
+              <div className="flex justify-end gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    setIsCreateFolderOpen(false);
+                    setNewFolderName("");
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={!newFolderName.trim() || creatingFolder}
+                >
+                  {creatingFolder ? (
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  ) : (
+                    "Create"
+                  )}
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* Breadcrumb navigation */}
-      <BreadcrumbNav
-        paths={pathSegments}
-        onNavigate={handleNavigate}
-      />
+      <BreadcrumbNav paths={pathSegments} onNavigate={handleNavigate} />
 
       {/* Main content area */}
       <Card className="flex-grow overflow-auto">

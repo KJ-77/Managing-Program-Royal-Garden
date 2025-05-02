@@ -1,20 +1,17 @@
 import React from "react";
 import { ChevronRight, Home } from "lucide-react";
 
+interface PathSegment {
+  name: string;
+  path: string;
+}
+
 interface BreadcrumbNavProps {
-  paths: string[];
+  paths: PathSegment[]; // Updated to accept objects instead of strings
   onNavigate: (path: string) => void;
 }
 
-export function BreadcrumbNav({
-  paths,
-  onNavigate,
-}: BreadcrumbNavProps) {
-  // Function to build the path up to a certain segment index
-  const buildPathUpToIndex = (index: number): string => {
-    return paths.slice(0, index + 1).join("/") + "/";
-  };
-
+export function BreadcrumbNav({ paths, onNavigate }: BreadcrumbNavProps) {
   return (
     <div className="flex items-center gap-1 px-2 py-3 overflow-x-auto bg-gray-100 dark:bg-gray-800 rounded-md text-sm">
       {/* Home/root button */}
@@ -35,10 +32,10 @@ export function BreadcrumbNav({
           {paths.map((segment, index) => (
             <React.Fragment key={index}>
               <button
-                onClick={() => onNavigate(buildPathUpToIndex(index))}
+                onClick={() => onNavigate(segment.path)}
                 className="hover:bg-gray-200 dark:hover:bg-gray-700 p-1 rounded whitespace-nowrap"
               >
-                {segment}
+                {segment.name}
               </button>
 
               {/* Add separator between segments, except for the last one */}
