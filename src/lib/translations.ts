@@ -27,9 +27,9 @@ export const translations: TranslationType = {
     english: "Login",
     arabic: "تسجيل الدخول",
   },
-  side:{
+  side: {
     english: "left",
-    arabic: "right"
+    arabic: "right",
   },
 
   // Home Page
@@ -43,7 +43,7 @@ export const translations: TranslationType = {
   },
   managePlants: {
     english: "Manage and track all plants in the royal garden inventory.",
-    arabic: "إدارة وتتبع جميع النباتات في مخزون الرويال غاردن."
+    arabic: "إدارة وتتبع جميع النباتات في مخزون الرويال غاردن.",
   },
   viewNotes: {
     english: "View Notes",
@@ -95,26 +95,100 @@ export const translations: TranslationType = {
     english: "Toggle theme",
     arabic: "تبديل السمة",
   },
-  
+
   // Company Notes Page
   companyNotFound: {
     english: "Company not found",
-    arabic: "الشركة غير موجودة"
+    arabic: "الشركة غير موجودة",
   },
   notes: {
     english: "Notes",
-    arabic: "ملاحظات"
+    arabic: "ملاحظات",
   },
   enterNotesAboutCompany: {
     english: "Enter notes about this company...",
-    arabic: "أدخل ملاحظات حول هذه الشركة..."
+    arabic: "أدخل ملاحظات حول هذه الشركة...",
   },
   saveNotes: {
     english: "Save Notes",
-    arabic: "حفظ الملاحظات"
+    arabic: "حفظ الملاحظات",
   },
   notesSavedSuccessfully: {
     english: "Notes saved successfully!",
-    arabic: "تم حفظ الملاحظات بنجاح!"
-  }
+    arabic: "تم حفظ الملاحظات بنجاح!",
+  },
+
+  // Documents Page
+  upload: {
+    english: "Upload",
+    arabic: "رفع",
+  },
+  newFolder: {
+    english: "New Folder",
+    arabic: "مجلد جديد",
+  },
+  refresh: {
+    english: "Refresh",
+    arabic: "تحديث",
+  },
+  searchFiles: {
+    english: "Search files...",
+    arabic: "البحث عن الملفات...",
+  },
+  gridView: {
+    english: "Grid View",
+    arabic: "عرض شبكي",
+  },
+  listView: {
+    english: "List View",
+    arabic: "عرض القائمة",
+  },
+  createNewFolder: {
+    english: "Create New Folder",
+    arabic: "إنشاء مجلد جديد",
+  },
+  folderName: {
+    english: "Folder name",
+    arabic: "اسم المجلد",
+  },
+  cancel: {
+    english: "Cancel",
+    arabic: "إلغاء",
+  },
+  create: {
+    english: "Create",
+    arabic: "إنشاء",
+  },
+  noFilesOrFolders: {
+    english: "No files or folders found",
+    arabic: "لم يتم العثور على ملفات أو مجلدات",
+  },
+  tryDifferentSearch: {
+    english: "Try a different search term",
+    arabic: "جرب مصطلح بحث مختلف",
+  },
+  confirmDelete: {
+    english: "Are you sure you want to delete",
+    arabic: "هل أنت متأكد أنك تريد حذف",
+  },
+  failedToLoadFiles: {
+    english: "Failed to load files. Please try again later.",
+    arabic: "فشل تحميل الملفات. الرجاء المحاولة مرة أخرى لاحقًا.",
+  },
+  failedToUploadFile: {
+    english: "Failed to upload file. Please try again.",
+    arabic: "فشل في رفع الملف. يرجى المحاولة مرة أخرى.",
+  },
+  failedToDeleteFile: {
+    english: "Failed to delete file. Please try again.",
+    arabic: "فشل في حذف الملف. يرجى المحاولة مرة أخرى.",
+  },
+  failedToDownloadFile: {
+    english: "Failed to download file. Please try again.",
+    arabic: "فشل في تنزيل الملف. يرجى المحاولة مرة أخرى.",
+  },
+  failedToCreateFolder: {
+    english: "Failed to create folder. Please try again.",
+    arabic: "فشل في إنشاء المجلد. يرجى المحاولة مرة أخرى.",
+  },
 };
