@@ -2,7 +2,14 @@
 
 // Base API URL - replace with your deployed API endpoint in production
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+  import.meta.env.VITE_API_BASE_URL ||
+  "https://gfv4zwbkl9.execute-api.us-east-1.amazonaws.com";
+
+// Common headers for all API requests
+const commonHeaders = {
+  "Content-Type": "application/json",
+  Accept: "application/json",
+};
 
 /**
  * Interface for file objects from S3
@@ -83,6 +90,45 @@ function getMimeType(extension: string | undefined): string {
 }
 
 /**
+ * Enhanced fetch function with retry capability
+ */
+async function fetchWithRetry(
+  url: string,
+  options: RequestInit = {},
+  retries = 3,
+  delay = 500
+): Promise<Response> {
+  try {
+    // Merge common headers with provided headers
+    const mergedOptions = {
+      ...options,
+      headers: {
+        ...commonHeaders,
+        ...(options.headers || {}),
+      },
+    };
+
+    const response = await fetch(url, mergedOptions);
+
+    // If we get a 503, let's try again after a delay
+    if (response.status === 503 && retries > 0) {
+      console.log(`Got 503, retrying... (${retries} retries left)`);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      return fetchWithRetry(url, options, retries - 1, delay * 1.5);
+    }
+
+    return response;
+  } catch (error) {
+    if (retries > 0) {
+      console.log(`Network error, retrying... (${retries} retries left)`);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      return fetchWithRetry(url, options, retries - 1, delay * 1.5);
+    }
+    throw error;
+  }
+}
+
+/**
  * Fetch files and folders from a specific path
  */
 export async function listFiles(
@@ -90,17 +136,25 @@ export async function listFiles(
   generateUrls: boolean = false
 ): Promise<FolderContents> {
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/files?prefix=${encodeURIComponent(
-        path
-      )}&generateUrls=${generateUrls}`
-    );
+    console.log(`Fetching files from ${path}...`);
+
+    const url = `${API_BASE_URL}/files?prefix=${encodeURIComponent(
+      path
+    )}&generateUrls=${generateUrls}`;
+
+    console.log(`Request URL: ${url}`);
+
+    const response = await fetchWithRetry(url);
 
     if (!response.ok) {
+      console.error(
+        `Error response from API: ${response.status} ${response.statusText}`
+      );
       throw new Error(`API error: ${response.status}`);
     }
 
     const data: FolderContents = await response.json();
+    console.log("API response data:", data);
 
     // Process file metadata for UI display
     data.files = data.files.map((file) => ({
@@ -134,7 +188,7 @@ export async function getFileUrl(
   useCdn: boolean = false
 ): Promise<string> {
   try {
-    const response = await fetch(
+    const response = await fetchWithRetry(
       `${API_BASE_URL}/files/${encodeURIComponent(key)}?cdn=${useCdn}`
     );
 
@@ -163,7 +217,7 @@ export async function getUploadUrl(
   headers: Record<string, string>;
 }> {
   try {
-    const response = await fetch(`${API_BASE_URL}/files`, {
+    const response = await fetchWithRetry(`${API_BASE_URL}/files`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -202,7 +256,7 @@ export async function uploadFile(
     );
 
     // Upload the file using the pre-signed URL
-    const uploadResponse = await fetch(uploadUrl, {
+    const uploadResponse = await fetchWithRetry(uploadUrl, {
       method: uploadMethod,
       headers: headers,
       body: file,
@@ -224,7 +278,7 @@ export async function uploadFile(
  */
 export async function deleteFile(key: string): Promise<void> {
   try {
-    const response = await fetch(
+    const response = await fetchWithRetry(
       `${API_BASE_URL}/files/${encodeURIComponent(key)}`,
       {
         method: "DELETE",
@@ -253,7 +307,7 @@ export async function createFolder(
       ? `${currentPath}${currentPath.endsWith("/") ? "" : "/"}${folderName}`
       : folderName;
 
-    const response = await fetch(`${API_BASE_URL}/folders`, {
+    const response = await fetchWithRetry(`${API_BASE_URL}/folders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

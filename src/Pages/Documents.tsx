@@ -57,23 +57,36 @@ export default function Documents() {
   const loadFiles = useCallback(async () => {
     setIsLoading(true);
     setError(null);
+    console.log("before loading files");
     try {
+      console.log("Starting to load files for path:", currentPath);
       const result = await listFiles(currentPath);
-      setFiles(result.files);
-      setFolders(result.folders);
-      setPathSegments(result.pathSegments);
-    } catch (err) {
+
+      // If we get here, we have successfully loaded the data
+      console.log("Files loaded successfully:", result);
+      setFiles(result.files || []);
+      setFolders(result.folders || []);
+      setPathSegments(result.pathSegments || []);
+    } catch (err: Error | unknown) {
       console.error("Error loading files:", err);
-      setError(t("failedToLoadFiles"));
+      // Show a more descriptive error message
+      const errorMessage =
+        err instanceof Error ? err.message : "Unknown error occurred";
+      setError(`${t("failedToLoadFiles")}: ${errorMessage}`);
+
+      // Set empty arrays to prevent showing stale data
+      setFiles([]);
+      setFolders([]);
+      setPathSegments([]);
     } finally {
       setIsLoading(false);
     }
   }, [currentPath, t]);
 
-  // Load files on component mount and when currentPath changes
+  // Load files only on component mount and when currentPath changes
   useEffect(() => {
     loadFiles();
-  }, [loadFiles]);
+  }, [currentPath]);
 
   // Handle navigation to a folder
   const handleNavigate = (path: string) => {
@@ -103,7 +116,7 @@ export default function Documents() {
         const file = files[i];
         await uploadFile(file, currentPath);
       }
-
+      console.log("before loading files after upload");
       // Refresh the file list
       await loadFiles();
 
